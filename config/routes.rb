@@ -1,5 +1,9 @@
 Treebook::Application.routes.draw do
-  resources :statuses
+  root "status#index" #for now
+
+  resources :statuses do 
+    post "popup"
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

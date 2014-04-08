@@ -1,5 +1,5 @@
 class StatusesController < ApplicationController
-  before_action :set_status, only: [:show, :edit, :update, :destroy]
+  before_action :set_status, only: [:popup ,:show, :edit, :update, :destroy]
 
   # GET /statuses
   # GET /statuses.json
@@ -19,6 +19,7 @@ class StatusesController < ApplicationController
 
   # GET /statuses/1/edit
   def edit
+
   end
 
   # POST /statuses
@@ -54,17 +55,21 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
-    @status.destroy
+    #@status.destroy
     respond_to do |format|
-      format.html { redirect_to statuses_url }
-      format.json { head :no_content }
+      format.js { render nothing: true }
+      format.html { redirect_to statuses_path }
     end
+  end
+
+  def popup
+    render partial: "statuses/small_form"
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_status
-      @status = Status.find(params[:id])
+      @status = Status.find(params[:id] || params[:status_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

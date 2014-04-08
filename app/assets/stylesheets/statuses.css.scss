@@ -1,3 +1,44 @@
 // Place all the styles related to the statuses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#edit_popup {
+	display: none; 
+	position: absolute;
+	padding:2%;
+	background-color: rgba(100,100,100,.5);
+	box-shadow: -2px -2px 5px black;
+	textarea{
+		min-width: 200px;
+	}
+}
+
+.status {
+	border-bottom: solid 1px #ccc;
+	margin:0;
+	position: relative;
+	padding: 10px 0;
+	h4 {
+		margin-top: 0;
+		padding-top: 10px;
+	}
+
+	
+
+	&:after {
+		content:".";
+		visibility: hidden;
+	}
+	
+	.crud {
+		display: none;
+	}
+
+	&:hover .crud{
+		display: inline;
+	}
+
+	&:hover {
+		background: #FAFAFA;
+	}
+}
