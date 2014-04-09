@@ -1,0 +1,5 @@
+<%= content_tag :div, class: "status clearfix", data: {id: which_status.id} do%>
+	<h4><%= which_status.name %></h4>
+	<p><%= which_status.content %></p>
+	<%= render "rud", model: which_status %>
+<% end %>

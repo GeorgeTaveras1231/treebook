@@ -1,11 +1,5 @@
 <%= bs_page_header "h1", "All Statuses" %>
 
 <% @statuses.each do |status| %>
-  <%= content_tag :div, class: "status", role: status.id do%>
-    <h4><%= status.name %></h4>
-    <p><%= status.content %></p>
-    <div class="crud">
-      <%= rud_links status, delete:{remote: true, class: "delete_model"}, update:{class: "edit_model"} %>
-    </div>
-  <% end %>
+	<%= render "individual_status", which_status: status %>
 <% end %>

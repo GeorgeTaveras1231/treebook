@@ -1,5 +1,5 @@
 class StatusesController < ApplicationController
-  before_action :set_status, only: [:popup ,:show, :edit, :update, :destroy]
+  before_action :set_status, only: [:show, :edit, :update, :destroy]
 
   # GET /statuses
   # GET /statuses.json
@@ -45,6 +45,7 @@ class StatusesController < ApplicationController
       if @status.update(status_params)
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { head :no_content }
+        format.js { render nothing: true }
       else
         format.html { render action: 'edit' }
         format.json { render json: @status.errors, status: :unprocessable_entity }
@@ -55,15 +56,10 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
-    #@status.destroy
+    @status.destroy
     respond_to do |format|
-      format.js { render nothing: true }
       format.html { redirect_to statuses_path }
     end
-  end
-
-  def popup
-    render partial: "statuses/small_form"
   end
 
   private

@@ -1,10 +1,10 @@
 Treebook::Application.routes.draw do
-  root "status#index" #for now
+  devise_for :users
+  root "statuses#index" #for now
 
-  resources :statuses do 
-    post "popup"
-  end
+  resources :statuses
 
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

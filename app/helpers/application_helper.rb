@@ -19,16 +19,18 @@ module ApplicationHelper
 
 		edit_path = send("edit_#{model.class.name.downcase}_path", model)
 		
-		read = link_to("#{time_ago_in_words(model.created_at)} ago", model, defaults[:read])
-     	update = link_to("Edit", edit_path, defaults[:update])
-     	delete = link_to("Delete", model, defaults[:delete])
+		links = {
+			read: link_to("#{time_ago_in_words(model.created_at)} ago", model, defaults[:read]),
+			update: link_to("Edit", edit_path, defaults[:update]),
+			delete: link_to("Delete", model, defaults[:delete])
+		}
 
-     	raw [read, update, delete].join(delimiter)
+     	html = links.keep_if do |action, link|
+     		opts[action] != false
+     	end.values.join(delimiter)
+
+     	raw html
 	end
-
-
-	# navbar helper
-	# place on class definition for button
 	
 
 end
