@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.4'
 
 gem "devise", '3.0'
+gem "simple_form"
+gem "decent_exposure"
+
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

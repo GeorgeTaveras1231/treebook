@@ -2,31 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.push_right {
-	float:right;
-	width: 50%;
-	text-align: right;
-}
-
-.push_left {
-	float:left;
-	width: 50%;
-}
-
-
-#edit_popup {
-	display: none; 
-	position: absolute;
-	right: 0;
-	//padding:2%;
-	background-color: rgba(100,100,100,.5);
-	box-shadow: -2px -2px 5px black;
-	textarea{
-		min-width: 200px;
-		resize: none;
-	}
-	box-sizing: border-box;
-}
 
 .status {
 	border-bottom: solid 1px #ccc;
@@ -49,11 +24,11 @@
 		visibility: hidden;
 	}
 	
-	.crud {
+	.update-delete {
 		display: none;
 	}
 
-	&:hover .crud{
+	&:hover .update-delete{
 		display: inline;
 	}
 

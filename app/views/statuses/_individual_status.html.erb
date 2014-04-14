@@ -1,5 +1,23 @@
-<%= content_tag :div, class: "status clearfix", data: {id: which_status.id} do%>
-	<h4><%= which_status.name %></h4>
-	<p><%= which_status.content %></p>
-	<%= render "rud", model: which_status %>
+<%= content_tag :div, class: "status clearfix" do%>
+	<%= content_tag :h4 do %>
+    <%= link_to for_status.user.email, for_status.user %>
+  <% end %>
+  <%= content_tag :p do %>
+    <%= for_status.content %>
+  <% end %>
+
+  <%= "#{pluralize(for_status.likes_count, 'like')} in #{time_ago_in_words(for_status.updated_at)}" %>
+  <% if for_status.belongs_to? current_user %>
+    <%= content_tag :span, class: "update-delete" do %> 
+    | <%= link_to "Edit", edit_status_path(for_status) %> 
+    | <%= link_to "Delete", for_status, method: 'delete', data: {confirm: "Are you sure this is what you want?"} %>
+    <% end %>
+  <% else %> 
+    |
+    <%= content_tag :span do %>
+      <%= link_to "Like", status_likes_path(for_status), method: 'post' %>
+      <i class="icon-thumbs-up"></i>
+    <% end %>
+  <% end %>
 <% end %>
+

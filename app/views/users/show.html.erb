@@ -1,0 +1,5 @@
+<%= bs_page_header "h1", user.email %>
+<%= link_to "New Status", new_status_path, class: "btn btn-success" %>
+<% user.statuses.each do |s| %> 
+  <%= render "statuses/individual_status", for_status: s %>
+<% end %>

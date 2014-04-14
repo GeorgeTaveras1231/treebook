@@ -1,10 +1,15 @@
 Treebook::Application.routes.draw do
-  devise_for :users
-  root "statuses#index" #for now
+  devise_for :users, controllers: { registrations: "registrations_strategy", sessions: "sessions_strategy"} 
 
-  resources :statuses
+  root "static#home"
+  get "static/about"
 
-  resources :users
+  resources :users, only: [:show,:index], path: "users/profile/"
+
+  resources :statuses, except: [:show] do
+    resources :likes, only: [:create]
+  end 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
