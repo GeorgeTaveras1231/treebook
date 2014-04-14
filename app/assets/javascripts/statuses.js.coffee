@@ -4,4 +4,12 @@
 
 
 
+$("html").on 'focusin', ".inline-status-form textarea", ->
+  
+  $(".inline-status-form .form-actions").css
+    display: "block"
 
+$("html").on 'focusout', ".inline-status-form textarea", ->
+  if $(this).val() is ""
+    $(".inline-status-form .form-actions").css
+      display: "none"

@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  expose(:current_like){ find_likeable.likes.build(user_id: current_user.id) }
+  expose(:current_like){ current_user.like(find_likeable) }
 
   before_action :verify_like
 
@@ -11,6 +11,14 @@ class LikesController < ApplicationController
         format.html { redirect_to :back, alert: "#{current_like.errors.messages.values.join('. ')}" }
       end
     end
+  end
+
+  def destroy
+    current_like.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "disliked :(" }
+    end
+
   end
 
   private
@@ -29,4 +37,5 @@ class LikesController < ApplicationController
         redirect_to :back, alert: "You can't like your own stuff."
       end
     end
+
 end

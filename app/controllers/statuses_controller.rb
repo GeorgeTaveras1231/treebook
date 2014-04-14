@@ -5,7 +5,6 @@ class StatusesController < ApplicationController
   expose(:all_statuses, model: :status){ Status.all }
   expose(:current_status){ current_status_strategy }
  
-
   def create
     respond_to do |format|
       if current_status.save

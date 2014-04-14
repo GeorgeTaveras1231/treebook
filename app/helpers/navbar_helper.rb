@@ -9,12 +9,12 @@ module NavbarHelper
         html = content_tag :a, href: "", class: "dropdown-toggle", data: { toggle: "dropdown" } do
          raw "#{name} #{content_tag :span, '', class: 'caret'}"
         end
-        html += dropdown { yield }
+        html += dropdown { yield(path) }
         html
       end
     else
       content_tag :li, class: "#{active? path}" do
-        link_to name, path
+        link_to raw(name), path
       end
     end
 	end

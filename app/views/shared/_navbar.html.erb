@@ -6,14 +6,14 @@
   		<ul class="nav">
         <li class="divider-vertical"></li>
         <% if current_user %>
-    			<%= nav_button "Statuses", statuses_path %>
     			<%= nav_button "Another link", "#" %>
         <% end %>
   		</ul>
       <ul class="nav pull-right">
         <% if current_user %>
-          <%= nav_button current_user.email, current_user do %>
-            <%= menu_button "Profile", current_user %>
+          <%= nav_button content_tag(:i, "", class: "icon-home"), statuses_path %>
+          <%= nav_button content_tag(:i,"",class: "icon-user" ) , current_user do |u|%>
+            <%= menu_button "Profile", u %>
             <%= menu_button "Settings", edit_user_registration_path %>
             <%= divider :li %>
             <%= menu_button "Sign out", destroy_user_session_path, link: { method: "delete" } %>

@@ -7,7 +7,7 @@ Treebook::Application.routes.draw do
   resources :users, only: [:show,:index], path: "users/profile/"
 
   resources :statuses, except: [:show] do
-    resources :likes, only: [:create]
+    resources :likes, only: [:create, :destroy]
   end 
 
   # The priority is based upon order of creation: first created -> highest priority.

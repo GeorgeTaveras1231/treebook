@@ -1,0 +1,9 @@
+<%= content_tag :span do %>
+  <% if current_user.like(to).new_record? %>
+    <%= link_to "Like", status_likes_path(to), method: 'post' %>
+    <i class="icon-thumbs-up"></i>
+  <% else %>
+    <%= link_to "Dislike", status_like_path(to, current_user.like(to)), method: 'delete' %>
+    <i class="icon-thumbs-down"></i>
+  <% end %>
+<% end %>

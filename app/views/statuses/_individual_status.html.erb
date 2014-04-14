@@ -1,23 +1,16 @@
 <%= content_tag :div, class: "status clearfix" do%>
 	<%= content_tag :h4 do %>
-    <%= link_to for_status.user.email, for_status.user %>
+    <%= link_to to.user.email, to.user %>
   <% end %>
   <%= content_tag :p do %>
-    <%= for_status.content %>
+    <%= to.content %>
   <% end %>
-
-  <%= "#{pluralize(for_status.likes_count, 'like')} in #{time_ago_in_words(for_status.updated_at)}" %>
-  <% if for_status.belongs_to? current_user %>
-    <%= content_tag :span, class: "update-delete" do %> 
-    | <%= link_to "Edit", edit_status_path(for_status) %> 
-    | <%= link_to "Delete", for_status, method: 'delete', data: {confirm: "Are you sure this is what you want?"} %>
-    <% end %>
-  <% else %> 
+  <%= "#{pluralize(to.likes_count, 'like')} in #{time_ago_in_words(to.updated_at)}" %>
+  <% if to.belongs_to? current_user %>
+    <%= render "statuses/edit_and_delete", to: to %>
+  <% else %>
     |
-    <%= content_tag :span do %>
-      <%= link_to "Like", status_likes_path(for_status), method: 'post' %>
-      <i class="icon-thumbs-up"></i>
-    <% end %>
+    <%= render "likes/like_or_dislike", to: to %>
   <% end %>
 <% end %>
 
