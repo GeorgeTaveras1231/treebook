@@ -2,8 +2,8 @@ class StatusesController < ApplicationController
   before_action :verify_user
   
   expose(:user){ current_user }
-  expose(:all_statuses, model: :status){ Status.all }
-  expose(:current_status){ current_status_strategy }
+  expose(:all_statuses, model: :status){ Status.most_recent }
+  expose(:current_status){ current_content_strategy }
  
   def create
     respond_to do |format|
@@ -34,12 +34,12 @@ class StatusesController < ApplicationController
 
   private
 
-    def current_status_strategy
+    def current_content_strategy()
       status = Status.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         status = user.statuses.new
       ensure
-        status.update_attributes(status_params) if params[:status]
+        status.update_attributes(content_params) if params[:status]
     end
 
     def verify_user
@@ -48,7 +48,7 @@ class StatusesController < ApplicationController
       end
     end
 
-    def status_params
-      params.require(:status).permit(:content)
+    def content_params(model=:status)
+      params.require(model).permit(:content)
     end
 end

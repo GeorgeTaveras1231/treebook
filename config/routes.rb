@@ -10,6 +10,12 @@ Treebook::Application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end 
 
+  resources :comments do
+    resources :likes, only: [:create, :destroy]
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

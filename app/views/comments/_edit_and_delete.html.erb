@@ -1,0 +1,4 @@
+<%= content_tag :span, class: "update-delete" do %> 
+  <%= link_to content_tag(:i,"",class: "icon-edit"), edit_comment_path(current_comment) %> 
+  <%= link_to content_tag(:i,"",class: "icon-remove"), current_comment, method: 'delete', data: {confirm: "Are you sure this is what you want?"} %>
+<% end %> 

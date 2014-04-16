@@ -2,11 +2,11 @@
 
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-  <%= f.input :email, label: false, autofocus: true, placeholder:"Your email" %>
-
-  <%= f.input :password, label: false, placeholder: "Password" %>
+  <%= f.input_field :email, label: false, autofocus: true, placeholder:"Your email" %>
+  <br>
+  <%= f.input_field :password, label: false, placeholder: "Password" %>
   <% if devise_mapping.rememberable? -%>
-    <%= f.input :remember_me, as: :boolean %>
+    <%= f.input :remember_me, as: :boolean, boolean_style: "inline" %>
   <% end -%>
 
   <%= f.button :submit, "Sign in" %>

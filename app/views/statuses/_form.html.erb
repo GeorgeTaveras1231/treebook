@@ -1,5 +1,5 @@
 
-<%= simple_form_for(current_status, html:{ class: "form-horizontal" }) do |f| %>
+<%= simple_form_for(current_status, html:{class: "form-horizontal" }) do |f| %>
 
     <% if current_status.errors.any? %>
         <div id="error_explanation">
@@ -13,10 +13,10 @@
         </div>
     <% end %>
 
-      <%= f.input :content, label: false, input_html: {placeholder: "content..."} %>
+      <%= f.input :content, label: false, input_html: {placeholder: "What's on your mind?" } %>
 
       <div class="form-actions">
-        <%= f.button :submit, "Share" %>
+        <%= f.button :submit, "Post" %>
       </div>
 
 <% end %>

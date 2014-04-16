@@ -6,7 +6,7 @@ class LikesController < ApplicationController
   def create
     respond_to do |format|
       if current_like.save
-        format.html { redirect_to :back, notice: "liked :)" }
+        format.html { redirect_to :back }
       else
         format.html { redirect_to :back, alert: "#{current_like.errors.messages.values.join('. ')}" }
       end
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
   def destroy
     current_like.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: "disliked :(" }
+      format.html { redirect_to :back }
     end
 
   end

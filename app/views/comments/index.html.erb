@@ -1,0 +1,7 @@
+<%= render "inline_form", content: new_status, type: :status %>
+
+<%= content_tag :div do %>
+  <% statuses.most_recent.each do |s| %>
+    <%= render "status", current_status: s %>
+  <% end %>
+<% end %>

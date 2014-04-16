@@ -1,5 +1,5 @@
-<%= bs_page_header "h1", user.email %>
-<%= render "statuses/new_inline" %>
-<% user.statuses.each do |s| %> 
+<%= bs_page_header "h1", user.full_name %>
+<%= render "statuses/new_inline", mod: current_status %>
+<% all_statuses.each do |s| %> 
   <%= render "statuses/individual_status", to: s if s.persisted?%>
 <% end %>

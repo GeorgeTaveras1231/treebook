@@ -4,15 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :signed_in?
-  
+
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy
   end
 
-  def signed_in?
-    unless current_user
-      redirect_to root_path, alert: "You are not signed in."
+  protected
+    def signed_in?
+      unless current_user
+        redirect_to root_path, alert: "You are not signed in."
+      end
     end
-  end
-
 end

@@ -1,6 +1,6 @@
 <%= content_tag :div, class: "status clearfix" do%>
 	<%= content_tag :h4 do %>
-    <%= link_to to.user.email, to.user %>
+    <%= link_to to.user.full_name, to.user %>
   <% end %>
   <%= content_tag :p do %>
     <%= to.content %>
@@ -12,5 +12,7 @@
     |
     <%= render "likes/like_or_dislike", to: to %>
   <% end %>
+
+  <%#= render "comments/inline_comment", current_comment: to.new_comment %>
 <% end %>
 

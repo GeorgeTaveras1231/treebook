@@ -1,0 +1,4 @@
+<%= content_tag :div, class: "inline-#{type}-form" do %>
+  <% placeholder = (type == :status) ? "What's on your mind?" : "Comment..."%>
+  <%= render 'comments/form', current_comment: content, placeholder: placeholder%>
+<% end %>

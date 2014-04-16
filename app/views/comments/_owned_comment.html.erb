@@ -1,0 +1,20 @@
+<%= content_tag :div, class: "comment clearfix" do%>
+  <%= content_tag :h6 do %>
+    <%= link_to current_comment.user.full_name, current_comment.user %>
+    <%= content_tag :span, class: "pull-right" do %>
+      <%= render "comments/edit_and_delete", current_comment: current_comment %>
+    <% end %>
+  <% end %>
+  <%= content_tag :p do %>
+    <%= current_comment.content %>
+  <% end %>
+
+  <%= content_tag :div, class: "buttons" do %>
+    <% if current_comment.likes_count > 0 %>
+      <%= content_tag :div, class: "counter pull-right" do %>
+        <i class="icon-thumbs-up"></i>
+        <%= "#{current_comment.likes_count}"%>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
