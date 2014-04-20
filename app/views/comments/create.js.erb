@@ -1,0 +1,8 @@
+(function create(){
+  var content = '<%= j render "comment", current_comment: comment, user_info: { size: 30} %>';
+  var $content = $(content).css({display: "none"});
+
+  $('<%= ".status-#{comment.owner.id}" %> .comment-list').append($content);
+
+  $content.slideDown();
+})();

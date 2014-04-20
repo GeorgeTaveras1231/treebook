@@ -1,14 +1,19 @@
 class CommentsController < ApplicationController
-  #expose(:user){ current_user }
   expose(:comment){ comment_strategy }
-  expose(:statuses){ Comment.statuses }
+  expose(:statuses){ Comment.most_recent(7).statuses }
+  
   expose(:new_status){ current_user.comments.new }
 
+  layout "feed"
+
   def create
-    if comment.save
-      redirect_to :back
-    else
-      redirect_to :back, alert: "#{params} #{comment.errors.messages}"
+    respond_to do |format|
+      if comment.save
+        format.html { redirect_to :back }
+      else
+        format.html { redirect_to :back, alert: "#{comment.errors.full_messages.join('. ')}" }
+      end
+      format.js
     end
   end
 
@@ -28,4 +33,5 @@ class CommentsController < ApplicationController
          current_user.comments.new
       end
     end
+
 end

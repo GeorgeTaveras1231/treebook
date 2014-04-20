@@ -1,0 +1,18 @@
+<%= content_tag :div, class: "likeable-#{current_likeable.id}" do %>
+  
+  <% unless current_likeable.belongs_to? current_user %>
+    <%= content_tag :span, class: "likes" do %>
+      <%= render "likes/like_or_dislike", likeable: current_likeable, icons: false %>
+    <% end %>
+  <% end %>
+
+  <% if current_likeable.likes_count > 0 %>
+    <%= content_tag :div, class: "counter", data:{ hoverable_id: current_likeable.id } do %>
+
+      <%= content_tag :i, "",class: "icon-thumbs-up" %>
+      <%= "#{current_likeable.likes_count}"%>
+
+    <% end %>
+  <% end %>
+
+<% end %>

@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+new Hoverable(".counter", {
+  class: "hoverable", //css class for hover box
+  partial_path: "/hoverable/like_counter",
+  data: function( hoverableId, currentTarget ){
+    return {comments_id: hoverableId}
+  },
+});
+
+new Hoverable(".counter-even", {
+  class: "hoverable-special", //css class for hover box
+  partial_path: "/hoverable/like_counter",
+  data: function( hoverableId, currentTarget ){
+    return {comments_id: hoverableId}
+  },
+});
+

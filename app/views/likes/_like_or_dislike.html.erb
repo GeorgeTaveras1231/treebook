@@ -2,12 +2,12 @@
 
 <%= content_tag :span do %>
   <% if current_user.like(likeable).new_record? %>
-    <%= link_to "Like", model_likes_path(likeable), method: 'post' %>
+    <%= link_to "Like", model_likes_path(likeable), class: 'like-button',data: { method: 'post',remote: true } %>
     <% if icons %>
       <i class="icon-thumbs-up"></i>
     <% end %>
   <% else %>
-    <%= link_to "Dislike", model_like_path(likeable), method: 'delete' %>
+    <%= link_to "Dislike", model_like_path(likeable), class: 'dislike-button', data: { method: 'delete', remote: true , path: model_like_path(likeable)} %>
     <% if icons %>
       <i class="icon-thumbs-down"></i>
     <% end %>

@@ -1,18 +1,31 @@
-<%= content_tag :div, class: "comment clearfix" do%>
-  <%= content_tag :h6 do %>
-    <%= link_to current_comment.user.full_name, current_comment.user %>
-  <% end %>
-  <%= content_tag :p do %>
-    <%= current_comment.content %>
+<% klass ||= :comment %>
+
+<% (user_info ||= {}).merge!(current_comment: current_comment) %>
+
+<%= content_tag :div, class: "#{klass}-#{current_comment.id}" do %>
+  <%= content_tag :div, class: "content clearfix" do %>
+
+    <%= render "comments/comment_list/user_info", user_info %>
+
+      <%= content_tag :div, markdown(current_comment), class: "text" %>
+
+      <% if current_comment.is_status? %>
+        <%= render "comments/inline_form", content: current_comment.comments.new, type: :comment %>
+      <% end %>
+
+      <%= render "likes/likes_bar", current_likeable: current_comment %>
+
   <% end %>
 
-  <%= content_tag :div, class: "buttons" do %>
-    <%= render "likes/like_or_dislike", likeable: current_comment, icons: false %>    
-    <% if current_comment.likes_count > 0 %>
-      <%= content_tag :div, class: "counter pull-right" do %>
-        <i class="icon-thumbs-up"></i>
-        <%= "#{current_comment.likes_count}"%>
+  <% if current_comment.is_status? %>
+
+    <%= content_tag :div, class: "comment-list" do %>
+      <% current_comment.comments.each do |c| %>
+        <%= render "comments/comment", current_comment: c, user_info: {size: 30 }  if c.persisted?%>
       <% end %>
-    <% end %>
+    <% end %>    
+
   <% end %>
+
 <% end %>
+

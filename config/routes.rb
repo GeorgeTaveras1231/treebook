@@ -6,11 +6,9 @@ Treebook::Application.routes.draw do
 
   resources :users, only: [:show,:index], path: "users/profile/"
 
-  resources :statuses, except: [:show] do
-    resources :likes, only: [:create, :destroy]
-  end 
+  get 'hoverable/like_counter'
 
-  resources :comments do
+  resources :comments, path: "/home", except: :show do
     resources :likes, only: [:create, :destroy]
   end
 

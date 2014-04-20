@@ -1,0 +1,18 @@
+.hoverable {
+  background: rgba(0,0,0,0.7);
+  color: white;
+  box-shadow: 0 3px 3px #ccc;
+  border-radius: 0 5px 5px 5px;
+  font-family: sans-serif;
+  font-size: 11px;
+}
+
+.hoverable-special {
+  background: rgba(0,0,0,0.7);
+  color: red;
+  font-weight: bold;
+  box-shadow: 0 3px 3px #ccc;
+  border-radius: 0 5px 5px 5px;
+  font-family: sans-serif;
+  font-size: 11px;
+}

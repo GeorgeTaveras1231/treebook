@@ -1,5 +1,7 @@
 class LikesController < ApplicationController
+  
   expose(:current_like){ current_user.like(find_likeable) }
+  expose(:current_likeable){ current_like.owner }
 
   before_action :verify_like
 
@@ -8,8 +10,9 @@ class LikesController < ApplicationController
       if current_like.save
         format.html { redirect_to :back }
       else
-        format.html { redirect_to :back, alert: "#{current_like.errors.messages.values.join('. ')}" }
+        format.html { redirect_to :back, alert: "#{current_like.errors.messages.values.join('.<br>')}" }
       end
+      format.js { render 'update_likes_bar' }
     end
   end
 
@@ -17,22 +20,14 @@ class LikesController < ApplicationController
     current_like.destroy
     respond_to do |format|
       format.html { redirect_to :back }
+      format.js { render 'update_likes_bar' }
     end
 
   end
 
   private
-    def find_likeable
-      params.each do |name, val|
-        if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(val)
-        end
-      end
-      nil
-    end
-
     def verify_like
-      #users cant like their own material
+      #users cant like their own stuff
       if find_likeable.user.id == current_user.id
         redirect_to :back, alert: "You can't like your own stuff."
       end

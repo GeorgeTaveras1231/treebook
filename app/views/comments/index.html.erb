@@ -1,7 +1,17 @@
-<%= render "inline_form", content: new_status, type: :status %>
 
-<%= content_tag :div do %>
-  <% statuses.most_recent.each do |s| %>
-    <%= render "status", current_status: s %>
+<%= content_for :editor do %>
+  <%= render "inline_form", content: new_status, type: :status %>
+<% end %>
+
+<%= content_for :user_info do %>
+  <%= render "users/card", user: current_user %>
+<% end %>
+
+<%= content_for :feed do %>
+  <%= content_tag :div, class: "feed" do %>
+    <% statuses.each_with_index do |s, i| %>
+      <%= render "comment", current_comment: s, klass: :status, user_info:{size: 50, title_tag: :h4, even: i.even? } %>
+    <% end %>
   <% end %>
 <% end %>
+

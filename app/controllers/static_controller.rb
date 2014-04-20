@@ -1,20 +1,21 @@
 class StaticController < ApplicationController
-  skip_before_action :signed_in?
+  skip_before_action :assert_session
 
-  before_action :new_user, only: :home
-
+  before_action :authorize_visit, only: :home
+  
   def home
   end
 
   def about
   end
 
-  private
-    def new_user
-      if current_user
-        redirect_to statuses_path
-      else
-        redirect_to new_user_registration_path
+    private
+
+      def authorize_visit
+        if signed_in?
+          redirect_to comments_path
+        else
+          redirect_to new_user_registration_path
+        end
       end
-    end
 end

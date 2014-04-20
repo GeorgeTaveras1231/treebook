@@ -1,0 +1,15 @@
+<% size ||= nil %>
+<% title_tag ||= :h6 %>
+
+<%= content_tag :div, class: "user-info" do %>
+  <%= gravatar_img_for current_comment.user, size %>
+  <%= content_tag :a, href: user_path(current_comment.user) do %>
+    <%= content_tag title_tag do %>
+      <%= current_comment.user.full_name %>
+    <% end %>
+  <% end %>
+  <br>
+  <%= content_tag :div, class: 'date-stamp' do %>
+    <%= "#{time_ago_in_words(current_comment.updated_at)} ago" %>
+  <% end %>
+<% end %>

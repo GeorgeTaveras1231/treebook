@@ -7,6 +7,9 @@ gem "devise", '3.0'
 gem "simple_form"
 gem "decent_exposure"
 
+#markdown! :)
+gem "redcarpet"
+
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

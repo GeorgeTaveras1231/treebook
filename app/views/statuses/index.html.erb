@@ -1,5 +1,0 @@
-<%= bs_page_header "h1", "All Statuses" %>
-<%= render "statuses/new_inline" %>
-<% all_statuses.each do |s| %> 
-	<%= render "statuses/individual_status", to: s if s.persisted?%>
-<% end %>

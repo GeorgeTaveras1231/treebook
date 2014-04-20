@@ -1,0 +1,3 @@
+<%= likes.last(5).map do |l| %>
+  <%l.user.full_name %>
+<% end.join('<br>').html_safe %>

@@ -1,0 +1,4 @@
+(function updateLikeBar() {
+  $('.<%= "likeable-#{current_likeable.id}" %>').replaceWith( "<%= j render 'likes/likes_bar', current_likeable: current_likeable %>");
+  Hoverable.clearCache('.counter','<%= current_likeable.id %>');
+})();

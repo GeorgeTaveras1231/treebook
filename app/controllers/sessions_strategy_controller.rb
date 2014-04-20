@@ -1,3 +1,3 @@
 class SessionsStrategyController < Devise::SessionsController
-  skip_before_action :signed_in?
+  skip_before_action :assert_session
 end
