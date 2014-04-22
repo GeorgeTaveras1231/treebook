@@ -1,19 +1,24 @@
-<% klass ||= :comment %>
-
+<% klass = current_comment.is_status? ? :status : :comment %>
 <% (user_info ||= {}).merge!(current_comment: current_comment) %>
+
+<%# ^^ options/settings ^^ #%>
 
 <%= content_tag :div, class: "#{klass}-#{current_comment.id}" do %>
   <%= content_tag :div, class: "content clearfix" do %>
 
     <%= render "comments/comment_list/user_info", user_info %>
 
-      <%= content_tag :div, markdown(current_comment), class: "text" %>
+    <% if current_comment.belongs_to? current_user %>
+      <%= render "comments/owner_options", current_comment: current_comment %>
+    <% end %>
 
-      <% if current_comment.is_status? %>
-        <%= render "comments/inline_form", content: current_comment.comments.new, type: :comment %>
-      <% end %>
+    <%= content_tag :div, markdown(current_comment), class: "text" %>
 
-      <%= render "likes/likes_bar", current_likeable: current_comment %>
+    <% if klass == :status %>
+      <%= render "comments/inline_form", content: current_comment.comments.new, type: :comment, remote: true %>
+    <% end %>
+
+    <%= render "likes/likes_bar", current_likeable: current_comment %>
 
   <% end %>
 

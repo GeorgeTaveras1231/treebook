@@ -1,0 +1,26 @@
+<% 
+  #reload comment to avoid posting an empty status or comment
+  reloaded_comment = comment.reload
+
+  id = reloaded_comment.id 
+  edit_form_selector = ".inline-edit-comment-form-#{id}" 
+  klass = reloaded_comment.is_status? ? :status : :comment 
+  
+  
+  comment_options = {} 
+  comment_options[:current_comment] = reloaded_comment
+  comment_options[:user_info] = if klass == :status
+     { size: 50, title_tag: :h4 }
+   else
+     { size: 30 }
+   end
+  
+  new_content = j(render "comment", comment_options) 
+%>
+
+(function update(){
+  var editFormSelector = "<%= edit_form_selector %>";
+  var newContent = "<%= new_content %>";
+
+  $(editFormSelector).replaceWith(newContent);
+})();

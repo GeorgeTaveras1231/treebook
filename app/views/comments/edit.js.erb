@@ -1,0 +1,19 @@
+<% 
+  klass =  comment.is_status? ? "status" : "comment"
+  new_content = (j render "comments/form", current_comment: comment, placeholder: "", remote: true)
+  id = comment.id
+%>
+
+(function(){
+
+  var edit = new editComment("<%= klass %>", <%= id %>, "<%= new_content %>");
+  edit.beginEdit(function(textarea){
+    textarea.autosize();
+    textarea.trigger('focus');
+  });
+
+})();
+
+
+
+

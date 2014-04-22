@@ -22,17 +22,26 @@
 		border: solid 0.1em #ccc;
 		border-left:0;
 		border-top:0;
+
+		.owner-options {
+			float: right;
+			clear: none;
+			display: none;
+		}
 		&:hover {
 			background: #FAFAFA;
+			.owner-options {
+				display: inline;
+			}
+		}
+
+		.text {
+			clear:both;
 		}
 	}
 
-	p {
-		float:right;
-	}
-
-
 	.user-info{
+		float: left;
 		width: auto;
 		h4, h6 {
 			margin: 0;
@@ -60,14 +69,7 @@
 		}
 		
 	}
-	
-	.update-delete {
-		display: none;
-	}
 
-	&:hover > .update-delete{
-		display: inline;
-	}
 	.inline-comment-form {
 		clear: both;
 		@extend .inline-status-form;
@@ -112,15 +114,18 @@
 					background: none;
 				}
 			}
-
-			p {
-				float: right;
-			}
 		}
 	}
 }
 
-
+[class^='inline-edit-comment-form-'] {
+	@extend .inline-status-form;
+	textarea {
+		min-height: 100px;
+		border: dashed 1px #ccc !important;	
+	}
+	
+}
 
 .inline-status-form {
 	@extend .clearfix;
@@ -133,14 +138,12 @@
 			border:none;
 			resize: vertical;
 			width:99% !important;
-			height: auto;
-			min-height: 40px;
-			max-height: 300px;
 			border-radius: 0;
 		}
 		textarea:focus {
 			background: #FAFAFA;
 			border-bottom: .1em solid #ccc;
+			outline:none !important;
 		}
 	}
 

@@ -14,11 +14,8 @@ class ApplicationController < ActionController::Base
     include SessionHelper
 
     def assert_session
-      if signed_in?
-        true
-      else
+      unless signed_in?
         redirect_to root_path, alert: "You are not signed in."
-        false
       end
     end
 end

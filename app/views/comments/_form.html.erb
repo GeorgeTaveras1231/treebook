@@ -1,5 +1,6 @@
 <% opts ||= {} %>
-<% opts[:remote]= true unless current_comment.is_status? %>
+<% remote ||= nil %>
+<% opts[:remote]||= true if remote %>
 
 <%= simple_form_for(current_comment, html: {class: "form-horizontal" }, data:opts) do |f| %>
 
@@ -17,7 +18,7 @@
 
       <%= f.hidden_field :commentable_id %>
       <%= f.hidden_field :commentable_type %>
-      <%= f.input :content, label: false, input_html: { placeholder: placeholder }%>
+      <%= f.input :content, label: false, input_html: { id: nil ,placeholder: placeholder }%>
 
       <div class="form-actions">
         <%= f.button :submit, "Post" %>

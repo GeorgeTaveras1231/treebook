@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable
 
   validates :content, presence: true
@@ -32,11 +32,7 @@ class Comment < ActiveRecord::Base
 
 
   def is_status?
-    if self.commentable_id
-      false
-    else
-      true
-    end
+    self.owner ? false : true
   end
 
   private

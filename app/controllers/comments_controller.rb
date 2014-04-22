@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
   expose(:comment){ comment_strategy }
   expose(:statuses){ Comment.most_recent(7).statuses }
-  
   expose(:new_status){ current_user.comments.new }
+
+  before_action :load_changes
 
   layout "feed"
 
@@ -17,8 +18,26 @@ class CommentsController < ApplicationController
     end
   end
 
-  def index
-    
+  def update
+    respond_to do |format|
+      comment.save
+      format.js
+      format.html { redirect_to comments_path }
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy
+    comment.destroy
+    respond_to do |format|
+      format.js
+      format.html { redirect_to comments_path }
+    end
   end
 
   private
@@ -26,11 +45,15 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:content, :commentable_id, :commentable_type)
     end
 
+    def load_changes
+      comment.update(comment_params) if params[:comment]
+    end
+
     def comment_strategy
-      if params[:comment]
-        current_user.comments.new(comment_params)
+      if params[:id]
+        current_user.comments.find(params[:id])
       else
-         current_user.comments.new
+        current_user.comments.new
       end
     end
 

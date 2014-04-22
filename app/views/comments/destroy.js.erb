@@ -1,0 +1,9 @@
+<%
+  klass = comment.is_status? ? :status : :comment
+  comment_selector = "#{klass}-#{comment.id}"
+%>
+
+(function destroy(){
+  var commentSelector = ".<%= comment_selector %>";
+  $(commentSelector).slideUp();
+})();

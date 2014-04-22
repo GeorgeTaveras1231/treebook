@@ -1,5 +1,6 @@
 class window.Hoverable
 
+
   _argumentParser = (args...)->
     @selector = args[0]
     if args[1]?
@@ -23,23 +24,10 @@ class window.Hoverable
     all_selectors = Hoverable.all_selectors
     hoverable_instance = _findCorrespondingInstance( e.currentTarget )
 
-    hoverable_instance_exists = hoverable_instance?
-
-    if hoverable_instance_exists
-
-      if hoverable_instance.mouseIn?
-        hoverable_instance.mouseIn.defaultAction = ->
-          Hoverable.mouseInDefault(hoverable_instance, e.currentTarget)
-        hoverable_instance.mouseIn()
-      else
-        Hoverable.mouseInDefault(hoverable_instance, e.currentTarget)
-
+    if hoverable_instance?
+      Hoverable.mouseInDefault(hoverable_instance, e.currentTarget)
     else
-      if hoverable_instance_exists and hoverable_instance.mouseOut?
-        hoverable_instance.mouseOut.defaultAction = Hoverable.mouseOutDefault
-        hoverable_instance.mouseOut(Hoverable.content_box)
-      else
-        Hoverable.mouseOutDefault()
+      Hoverable.mouseOutDefault()
     e.stopPropagation()
   ##_mouseOverFunction; end
 
@@ -48,6 +36,9 @@ class window.Hoverable
   @content_mapping = {}
   @cachedPartials = {}
 
+  # base css
+  # at the moment the hoverbox requires a css class
+  # specified at initialization for custom styling  
   @content_box = $ '<div>', 
     css: 
       display: "none"
@@ -116,7 +107,7 @@ class window.Hoverable
   #prototype.loadPartial; end
 
   constructor: (args...)->
-    __this: _argumentParser.call @, args...
+    _argumentParser.call @, args...
 
     Hoverable.content_mapping[@selector] = @content if @content?
     Hoverable.all_selectors.push(@selector)

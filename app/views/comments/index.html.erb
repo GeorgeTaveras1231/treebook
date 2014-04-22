@@ -10,7 +10,7 @@
 <%= content_for :feed do %>
   <%= content_tag :div, class: "feed" do %>
     <% statuses.each_with_index do |s, i| %>
-      <%= render "comment", current_comment: s, klass: :status, user_info:{size: 50, title_tag: :h4, even: i.even? } %>
+      <%= render "comment", current_comment: s, user_info:{size: 50, title_tag: :h4 } %>
     <% end %>
   <% end %>
 <% end %>

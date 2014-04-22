@@ -17,18 +17,16 @@
 
 
 new Hoverable(".counter", {
-  class: "hoverable", //css class for hover box
-  partial_path: "/hoverable/like_counter",
+  //css class for hover box
+  class: "hoverable", 
+  //ask this path for corresponding partial
+  //which is being handled by HoverableController
+  //the current partial is at likes/_hoverable.html.erb
+  partial_path: "/hoverable/like_counter", 
+  //data function specifies how to handle the data provided
+  //on the data-hoverable attribute before it is sent to the
+  //partial path as a parameter
   data: function( hoverableId, currentTarget ){
     return {comments_id: hoverableId}
   },
 });
-
-new Hoverable(".counter-even", {
-  class: "hoverable-special", //css class for hover box
-  partial_path: "/hoverable/like_counter",
-  data: function( hoverableId, currentTarget ){
-    return {comments_id: hoverableId}
-  },
-});
-
